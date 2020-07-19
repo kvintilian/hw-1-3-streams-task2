@@ -1,8 +1,6 @@
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Main {
 
@@ -27,9 +25,23 @@ public class Main {
                 .mapToInt(People::getAge)
                 .average()
                 .getAsDouble());
-        // Если в выборке будут только женщины и ни одного мужчины
-        // будет исключение NoSuchElementException: No value present связано это с тем,
-        // что выборка будет пустая по фильтру "только мужчины"
+
+        /* Если в выборке будут только женщины и ни одного мужчины
+           будет исключение NoSuchElementException: No value present связано это с тем,
+           что выборка будет пустая по фильтру "только мужчины"
+           в качестве решения может быть следующий код:
+
+            OptionalDouble aDouble = peoples.stream()
+                    .filter(value -> value.getSex() == Sex.MAN)
+                    .mapToInt(People::getAge)
+                    .average();
+            if (aDouble.isPresent()) {
+                System.out.println("Средний возраст мужчин: " +aDouble.getAsDouble());
+            } else {
+                System.out.println("Мужчин в выборке нет");
+            }
+
+         */
 
         System.out.println("Количество потенциальных работоспособных людей: "
                 + peoples.stream()
