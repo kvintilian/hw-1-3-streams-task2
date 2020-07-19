@@ -15,6 +15,7 @@ public class Main {
 
         System.out.println("Военнообязанные: ");
         peoples.stream()
+                .filter(value -> value.getSex() == Sex.MAN)
                 .filter(value -> 18 <= value.getAge() && value.getAge() < 35)
                 .collect(Collectors.toList())
                 .forEach(System.out::println);
